@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#12002a" />
+  <meta name="description" content="Ominy — Desenvolvimentos digitais para produtividade e vendas. Apps de gestão e landing pages de alta conversão." />
+  <meta name="keywords" content="app de gestão, landing page, conversão, produtividade, soluções digitais, Ominy" />
+  <meta property="og:title" content="Ominy — Soluções Digitais" />
+  <meta property="og:description" content="Apps de gestão e landing pages de alta conversão. Transforme sua produtividade e aumente suas vendas." />
+  <meta property="og:type" content="website" />
+
+  <title>Ominy — Apps de Gestão e Landing Pages de Alta Conversão</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- POPUP INICIAL -->
+  <div class="welcome-modal" id="welcomeModal" aria-hidden="false">
+    <div class="welcome-overlay" id="welcomeOverlay"></div>
+
+    <div class="welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+      <button class="welcome-close" id="closeWelcome" aria-label="Fechar abertura">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="welcome-image-wrap">
+        <img src="img/WhatsApp Image 2026-04-23 at 14.47.46.jpeg" alt="Abertura Ominy" class="welcome-image" />
+      </div>
+
+      <div class="welcome-content">
+        <span class="welcome-badge">Bem-vindo à Ominy</span>
+        <h2 id="welcomeTitle">Soluções digitais para produtividade e vendas</h2>
+        <p>
+          Aplicativos de gestão e landing pages modernas para empresas, autônomos,
+          vendedores e profissionais que querem crescer no digital.
+        </p>
+
+        <div class="welcome-actions">
+          <button class="btn btn-primary" id="enterSite">
+            Entrar no site <i data-lucide="arrow-right"></i>
+          </button>
+          <a class="btn btn-ghost"
+            href="https://wa.me/message/QYQ5WWRNW7UXF1?text=Olá!%20Estou%20pronto%20para%20começar%20com%20a%20Ominy."
+            target="_blank" rel="noopener">
+            <i data-lucide="message-circle"></i> WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="site-header" class="site-header">
+
+    <div class="header-line"></div>
+
+    <div class="container header-inner">
+
+      <!-- LOGO -->
+      <a href="#top" class="logo">
+        <img src="img/Group 23 2.png" alt="Ominy" class="logo-image" />
+      </a>
+
+      <!-- MENU DESKTOP -->
+      <nav class="nav-desktop" aria-label="Menu principal">
+        <a href="#servicos">SERVIÇOS</a>
+        <a href="#beneficios">POR QUE NÓS</a>
+        <a href="#como-funciona">PROCESSO</a>
+        <a href="#contato">CONTATO</a>
+      </nav>
+
+      <!-- BOTÃO HEADER -->
+      <a class="header-cta" href="https://wa.me/message/QYQ5WWRNW7UXF1" target="_blank" rel="noopener">
+        Fale Conosco
+      </a>
+
+      <!-- BOTÃO MENU MOBILE -->
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        type="button"
+      >
+        <i data-lucide="menu" id="menuIcon"></i>
+      </button>
+
+    </div>
+
+    <!-- MENU MOBILE -->
+    <div class="nav-mobile" id="navMobile" hidden>
+      <a href="#servicos">Serviços</a>
+      <a href="#beneficios">Por que nós</a>
+      <a href="#como-funciona">Processo</a>
+      <a href="#contato">Contato</a>
+      <a class="mobile-btn" href="https://wa.me/message/QYQ5WWRNW7UXF1" target="_blank" rel="noopener">
+        Fale Conosco
+      </a>
+    </div>
+
+  </header>
+
+  <!-- HERO -->
+  <section id="top" class="hero">
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-violet"></div>
+    <div class="grid-bg"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <div class="badge reveal">
+          <i data-lucide="sparkles"></i>
+          Soluções digitais sob medida
+        </div>
+
+        <h1 class="reveal">
+          Seus clientes
+          <span class="highlight">
+            atendidos
+            <svg class="underline" viewBox="0 0 200 10" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 7 Q 50 0, 100 6 T 198 4" stroke="#a855f7" stroke-width="2.5" fill="none" stroke-linecap="round" />
+            </svg>
+          </span>
+          em segundos, todos os dias.
+        </h1>
+
+        <p class="hero-sub reveal">
+          Aplicativos de gestão eficientes e landing pages de alta conversão,
+          criados sob medida para empresas, advogados, vendedores e profissionais autônomos.
+        </p>
+
+        <div class="hero-ctas reveal">
+          <a class="btn btn-primary"
+            href="https://wa.me/message/QYQ5WWRNW7UXF1?text=Olá!%20Tenho%20interesse%20no%20App%20de%20Gestão."
+            target="_blank" rel="noopener">
+            Conhecer o App <i data-lucide="arrow-right"></i>
+          </a>
+          <a class="btn btn-ghost"
+            href="https://wa.me/message/QYQ5WWRNW7UXF1?text=Olá!%20Quero%20criar%20uma%20Landing%20Page%20de%20alta%20conversão."
+            target="_blank" rel="noopener">
+            Criar minha Landing Page <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="hero-trust reveal">
+          <span><span class="dot pulse-ring"></span> Entrega rápida</span>
+          <span><i data-lucide="message-circle"></i> Suporte via WhatsApp</span>
+          <span><i data-lucide="sparkles"></i> Design moderno e responsivo</span>
+        </div>
+      </div>
+
+      <div class="hero-image-wrap reveal">
+        <div class="hero-image-glow"></div>
+        <img src="img/WhatsApp Image 2026-04-23 at 14.48.17.jpeg" alt="Imagem principal Ominy" class="hero-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Nossos Serviços</p>
+        <h2>Dois produtos,<br><span class="text-purple">um objetivo:</span> resultados reais.</h2>
+        <p class="lead">Ferramentas que funcionam juntas para gerar mais organização, mais clientes e mais vendas.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <article class="card service reveal">
+          <img src="img/ominy_app_sem_borda.png" alt="App de gestão de demandas" class="card-top-image" />
+          <div class="card-body">
+            <div class="card-head">
+              <span class="icon-box"><i data-lucide="layout-dashboard"></i></span>
+              <span class="index-num">01</span>
+            </div>
+            <p class="eyebrow">Para empresas e freelancers</p>
+            <h3>App de Gestão de Demandas</h3>
+            <p class="muted">
+              Organize tarefas diárias, mensais e anuais em um só lugar.
+              Aumente a produtividade da sua equipe com uma interface simples, moderna e intuitiva.
+            </p>
+            <ul class="checks">
+              <li>Organização total das demandas</li>
+              <li>Controle de tarefas por períodos</li>
+              <li>Aumento real de produtividade</li>
+              <li>Interface simples e intuitiva</li>
+            </ul>
+            <a class="link-cta" href="https://wa.me/message/QYQ5WWRNW7UXF1" target="_blank" rel="noopener">
+              Conhecer o App <i data-lucide="arrow-up-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="card service reveal">
+          <img src="img/ominy_landing_sem_borda.png" alt="Desenvolvimento de landing page" class="card-top-image" />
+          <div class="card-body">
+            <div class="card-head">
+              <span class="icon-box"><i data-lucide="rocket"></i></span>
+              <span class="index-num">02</span>
+            </div>
+            <p class="eyebrow">Para advogados, vendedores e autônomos</p>
+            <h3>Desenvolvimento de Landing Pages</h3>
+            <p class="muted">
+              Páginas focadas em conversão, rápidas e modernas.
+              O design perfeito para transformar visitantes em clientes reais e consolidar sua presença digital.
+            </p>
+            <ul class="checks">
+              <li>Mais clientes todos os meses</li>
+              <li>Presença online profissional</li>
+              <li>Alta taxa de conversão</li>
+              <li>Performance e SEO otimizados</li>
+            </ul>
+            <a class="link-cta" href="https://wa.me/message/QYQ5WWRNW7UXF1" target="_blank" rel="noopener">
+              Criar minha Landing Page <i data-lucide="arrow-up-right"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos" class="section section-alt">
+    <div class="container">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Prova Social</p>
+        <h2>O que dizem nossos clientes.</h2>
+      </div>
+    </div>
+
+    <div class="marquee-wrap">
+      <div class="marquee-fade fade-l"></div>
+      <div class="marquee-fade fade-r"></div>
+
+      <div class="marquee-track" id="marqueeTrack">
+        <article class="card review">
+          <i data-lucide="quote" class="quote-ic"></i>
+          <div class="stars">★★★★★</div>
+          <p>"A Landing Page que a Ominy criou dobrou nossa captação de clientes no digital em 2 meses."</p>
+          <div class="review-who">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Carlos Almeida" />
+            <div>
+              <strong>Carlos Almeida</strong>
+              <small>Sócio · Escritório de Advocacia</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="card review">
+          <i data-lucide="quote" class="quote-ic"></i>
+          <div class="stars">★★★★★</div>
+          <p>"O App de Gestão mudou minha rotina. Finalmente tenho controle total das demandas da minha agência."</p>
+          <div class="review-who">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Mariana Souza" />
+            <div>
+              <strong>Mariana Souza</strong>
+              <small>CEO · Agência de Marketing</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="card review">
+          <i data-lucide="quote" class="quote-ic"></i>
+          <div class="stars">★★★★★</div>
+          <p>"Investi na landing page da Ominy e em 3 semanas fechei dois contratos novos."</p>
+          <div class="review-who">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Rafael Teixeira" />
+            <div>
+              <strong>Rafael Teixeira</strong>
+              <small>Consultor Autônomo</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="card review">
+          <i data-lucide="quote" class="quote-ic"></i>
+          <div class="stars">★★★★★</div>
+          <p>"Super organizada com o app. Consegui escalar minhas vendas sem perder nenhum prazo."</p>
+          <div class="review-who">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Juliana Ribeiro" />
+            <div>
+              <strong>Juliana Ribeiro</strong>
+              <small>Empreendedora · E-commerce</small>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos" class="section">
+    <div class="container">
+      <div class="section-head center reveal">
+        <h2>Escolha o plano ideal para o seu momento.</h2>
+      </div>
+
+      <div class="grid grid-2 narrow">
+        <div class="card plan reveal">
+          <span class="icon-box"><i data-lucide="zap"></i></span>
+          <p class="eyebrow">Assinatura Mensal</p>
+          <h3>App de Gestão</h3>
+          <p class="price">Sob consulta</p>
+          <small class="price-hint">Planos flexíveis por usuário</small>
+          <ul class="checks">
+            <li>Gestão de tarefas diárias, mensais e anuais</li>
+            <li>Organização completa de demandas</li>
+            <li>Múltiplos usuários e permissões</li>
+            <li>Relatórios de produtividade</li>
+            <li>Suporte prioritário via WhatsApp</li>
+          </ul>
+          <a class="btn btn-ghost block"
+            href="https://wa.me/message/QYQ5WWRNW7UXF1?text=Olá!%20Quero%20assinar%20o%20plano%20do%20App%20de%20Gestão."
+            target="_blank" rel="noopener">
+            Assinar agora
+          </a>
+        </div>
+
+        <div class="card plan highlighted reveal">
+          <span class="badge-top">Mais procurado</span>
+          <span class="icon-box"><i data-lucide="crown"></i></span>
+          <p class="eyebrow">Pagamento Único</p>
+          <h3>Landing Page</h3>
+          <p class="price">Sob consulta</p>
+          <small class="price-hint">+ manutenção opcional mensal</small>
+          <ul class="checks">
+            <li>Design exclusivo e responsivo</li>
+            <li>Otimização de SEO e performance</li>
+            <li>Copy focado em conversão</li>
+            <li>Integração com WhatsApp e Analytics</li>
+            <li>Entrega em até 10 dias úteis</li>
+          </ul>
+          <a class="btn btn-primary block"
+            href="https://wa.me/message/QYQ5WWRNW7UXF1?text=Olá!%20Quero%20solicitar%20um%20orçamento%20para%20Landing%20Page."
+            target="_blank" rel="noopener">
+            Solicitar orçamento
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section">
+    <div class="container">
+      <div class="final-cta reveal">
+        <div class="final-cta-media">
+          <img src="img/WhatsApp Image 2026-04-23 at 14.48.41.jpeg" alt="Contato Ominy" />
+        </div>
+        <div class="final-cta-inner">
+          <p class="eyebrow">Hora de agir</p>
+          <h2>Pronto para modernizar seu negócio?</h2>
+          <p class="lead">Em poucos minutos você fala com a gente no WhatsApp e dá o primeiro passo para um negócio mais produtivo e mais rentável.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary"
+              href="https://wa.me/message/QYQ5WWRNW7UXF1?text=Olá!%20Estou%20pronto%20para%20começar%20com%20a%20Ominy."
+              target="_blank" rel="noopener">
+              Comece agora <i data-lucide="arrow-right"></i>
+            </a>
+            <a class="btn btn-ghost"
+              href="https://wa.me/message/QYQ5WWRNW7UXF1"
+              target="_blank" rel="noopener">
+              <i data-lucide="message-circle"></i> Fale no WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="footer-logo">
+          <img src="img/Group 23 2.png" alt="Ominy" class="footer-logo-img" />
+        </a>
+        <p class="muted">
+          Soluções digitais feitas para transformar sua produtividade e acelerar suas vendas.
+          Apps de gestão + landing pages de alta conversão.
+        </p>
+        <div class="socials">
+          <!-- WhatsApp -->
+          <a href="https://wa.me/message/QYQ5WWRNW7UXF1" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/ominydev" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="#" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#servicos">App de Gestão</a></li>
+          <li><a href="#servicos">Landing Pages</a></li>
+          <li><a href="#como-funciona">Como Funciona</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#beneficios">Benefícios</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#planos">Planos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="https://wa.me/message/QYQ5WWRNW7UXF1" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/ominydev" target="_blank" rel="noopener">Instagram</a></li>
+          <li>Atendimento Seg–Sex · 9h–18h</li>
+          <li>ominydev@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Ominy Serviços Digitais. Todos os direitos reservados.</p>
+      <p>Feito com foco em produtividade e conversão.</p>
+    </div>
+  </footer>
+
+  
+
+  <script src="script.js" defer></script>
+</body>
+</html>
