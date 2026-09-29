@@ -1,306 +1,811 @@
+/* ==========================================
+   OMINY DESENVOLVIMENTOS
+   Main JavaScript
+========================================== */
+
+
 document.addEventListener("DOMContentLoaded", () => {
-  // ─── LUCIDE ICONS ────────────────────────────────────────────────────────
-  if (window.lucide) window.lucide.createIcons();
 
-  // ─── FOOTER YEAR ────────────────────────────────────────────────────────
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+    /* ======================================
+       ANO AUTOMÁTICO
+    ====================================== */
 
-  // ─── HEADER SCROLL ───────────────────────────────────────────────────────
-  const header = document.getElementById("site-header");
-  const handleHeaderScroll = () => {
-    if (!header) return;
-    header.classList.toggle("scrolled", window.scrollY > 20);
-  };
-  handleHeaderScroll();
-  window.addEventListener("scroll", handleHeaderScroll, { passive: true });
+    const year = document.getElementById("year");
 
-  // ─── MENU MOBILE ─────────────────────────────────────────────────────────
-  const menuToggle = document.getElementById("menuToggle");
-  const navMobile  = document.getElementById("navMobile");
-  const menuIcon   = document.getElementById("menuIcon");
+    if (year) {
+        year.textContent = new Date().getFullYear();
+    }
 
-  if (menuToggle && navMobile) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navMobile.classList.toggle("active");
-      navMobile.hidden = !isOpen;
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      if (menuIcon) {
-        menuIcon.setAttribute("data-lucide", isOpen ? "x" : "menu");
-        if (window.lucide) window.lucide.createIcons();
-      }
-    });
 
-    navMobile.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navMobile.classList.remove("active");
-        navMobile.hidden = true;
-        menuToggle.setAttribute("aria-expanded", "false");
-        if (menuIcon) {
-          menuIcon.setAttribute("data-lucide", "menu");
-          if (window.lucide) window.lucide.createIcons();
+    /* ======================================
+       MENU MOBILE
+    ====================================== */
+
+    const menuButton =
+        document.getElementById("mobileMenuButton");
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+
+    if (menuButton && mobileMenu) {
+
+        menuButton.addEventListener("click", () => {
+
+            mobileMenu.classList.toggle("active");
+
+            document.body.classList.toggle("menu-open");
+
+        });
+
+
+        const mobileLinks =
+            mobileMenu.querySelectorAll("a");
+
+
+        mobileLinks.forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                mobileMenu.classList.remove("active");
+
+                document.body.classList.remove("menu-open");
+
+            });
+
+        });
+
+    }
+
+
+    /* ======================================
+       HEADER AO ROLAR
+    ====================================== */
+
+    const header =
+        document.getElementById("header");
+
+
+    function updateHeader() {
+
+        if (window.scrollY > 50) {
+
+            header.style.background =
+                "rgba(4, 7, 11, 0.94)";
+
+            header.style.boxShadow =
+                "0 10px 40px rgba(0,0,0,.25)";
+
+        } else {
+
+            header.style.background =
+                "rgba(4, 7, 11, 0.76)";
+
+            header.style.boxShadow =
+                "none";
+
         }
-      });
-    });
-  }
 
-  // ─── MARQUEE INFINITO ────────────────────────────────────────────────────
-  const marqueeTrack = document.getElementById("marqueeTrack");
-  if (marqueeTrack) marqueeTrack.innerHTML += marqueeTrack.innerHTML;
+    }
 
-  // ─── POPUP INICIAL ───────────────────────────────────────────────────────
-  const welcomeModal   = document.getElementById("welcomeModal");
-  const closeWelcome   = document.getElementById("closeWelcome");
-  const enterSite      = document.getElementById("enterSite");
-  const welcomeOverlay = document.getElementById("welcomeOverlay");
 
-  const closeModal = () => {
-    if (!welcomeModal) return;
-    welcomeModal.classList.add("hidden");
-    welcomeModal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
-  };
-
-  if (welcomeModal) document.body.classList.add("modal-open");
-  closeWelcome?.addEventListener("click", closeModal);
-  enterSite?.addEventListener("click", closeModal);
-  welcomeOverlay?.addEventListener("click", closeModal);
-  document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
-
-  // ─── CURSOR GLOW ─────────────────────────────────────────────────────────
-  const cursorGlow = document.createElement("div");
-  cursorGlow.className = "cursor-glow";
-  document.body.appendChild(cursorGlow);
-
-  let mouseX = 0, mouseY = 0;
-  let glowX = 0, glowY = 0;
-
-  document.addEventListener("mousemove", e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  (function animateCursor() {
-    glowX += (mouseX - glowX) * 0.08;
-    glowY += (mouseY - glowY) * 0.08;
-    cursorGlow.style.transform = `translate(${glowX - 200}px, ${glowY - 200}px)`;
-    requestAnimationFrame(animateCursor);
-  })();
-
-  // ─── ADVANCED SCROLL REVEAL ──────────────────────────────────────────────
-  // Assign stagger delays to sibling .reveal elements inside grids
-  document.querySelectorAll(".grid, .bento").forEach(grid => {
-    const children = grid.querySelectorAll(".reveal");
-    children.forEach((el, i) => {
-      el.style.transitionDelay = `${i * 0.12}s`;
-    });
-  });
-
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-
-  document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-
-  // ─── SECTION TITLE CHAR SPLIT ANIMATION ──────────────────────────────────
-  document.querySelectorAll(".section-head h2, .hero h1, .final-cta-inner h2").forEach(heading => {
-    heading.classList.add("split-heading");
-    const html = heading.innerHTML;
-
-    // Only split pure text nodes, preserve child elements (span, etc.)
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = html;
-
-    // Walk only if the heading has no complex children (just text or .highlight span)
-    const hasOnlyTextAndHighlight = [...wrapper.childNodes].every(
-      n => n.nodeType === 3 || (n.nodeType === 1 && n.classList.contains("highlight"))
+    window.addEventListener(
+        "scroll",
+        updateHeader
     );
 
-    if (!hasOnlyTextAndHighlight) return;
 
-    heading.innerHTML = "";
-    wrapper.childNodes.forEach(node => {
-      if (node.nodeType === 3) {
-        // text node – wrap each word
-        node.textContent.split(/(\s+)/).forEach(part => {
-          if (!part.trim()) {
-            heading.appendChild(document.createTextNode(part));
-            return;
-          }
-          const word = document.createElement("span");
-          word.className = "word-reveal";
-          word.textContent = part;
-          heading.appendChild(word);
+    updateHeader();
+
+
+    /* ======================================
+       ANIMAÇÃO AO APARECER NA TELA
+    ====================================== */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+    const revealObserver =
+        new IntersectionObserver(
+
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                        revealObserver
+                            .unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.12,
+                rootMargin:
+                    "0px 0px -50px 0px"
+            }
+
+        );
+
+
+    revealElements.forEach(element => {
+
+        revealObserver.observe(element);
+
+    });
+
+
+    /* ======================================
+       NAVBAR - SEÇÃO ATIVA
+    ====================================== */
+
+    const sections =
+        document.querySelectorAll("main section[id]");
+
+    const navLinks =
+        document.querySelectorAll(
+            ".desktop-nav .nav-link, .liquid-nav .liquid-nav-item"
+        );
+
+
+    function updateNavigation() {
+
+        let currentSection = "";
+
+        sections.forEach(section => {
+
+            const sectionTop =
+                section.offsetTop - 180;
+
+            const sectionHeight =
+                section.offsetHeight;
+
+
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY <
+                sectionTop + sectionHeight
+            ) {
+
+                currentSection =
+                    section.getAttribute("id");
+
+            }
+
         });
-      } else {
-        heading.appendChild(node.cloneNode(true));
-      }
-    });
-  });
 
-  // Observe headings for word-reveal
-  const headingObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll(".word-reveal").forEach((word, i) => {
-          word.style.animationDelay = `${i * 0.06}s`;
-          word.classList.add("word-revealed");
+
+        navLinks.forEach(link => {
+
+            link.classList.remove("active");
+
+            const href =
+                link.getAttribute("href");
+
+
+            if (
+                href === `#${currentSection}`
+            ) {
+
+                link.classList.add("active");
+
+            }
+
         });
-        headingObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
 
-  document.querySelectorAll(".split-heading").forEach(h => headingObserver.observe(h));
-
-  // ─── PARALLAX HERO ELEMENTS ───────────────────────────────────────────────
-  const heroSection = document.querySelector(".hero");
-  const heroImg     = document.querySelector(".hero-img");
-  const heroOrbs    = document.querySelectorAll(".orb");
-
-  if (heroSection) {
-    window.addEventListener("scroll", () => {
-      const scrolled = window.scrollY;
-      const rect     = heroSection.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-
-      const progress = scrolled / window.innerHeight;
-
-      if (heroImg) {
-        heroImg.style.transform = `translateY(${progress * 40}px) scale(${1 - progress * 0.04})`;
-      }
-      heroOrbs.forEach((orb, i) => {
-        const dir = i % 2 === 0 ? 1 : -1;
-        orb.style.transform = `translateY(${progress * 60 * dir}px)`;
-      });
-    }, { passive: true });
-  }
-
-  // ─── CARD MAGNETIC HOVER ─────────────────────────────────────────────────
-  document.querySelectorAll(".card.service, .card.plan, .card.benefit").forEach(card => {
-    card.addEventListener("mousemove", e => {
-      const rect   = card.getBoundingClientRect();
-      const cx     = rect.left + rect.width  / 2;
-      const cy     = rect.top  + rect.height / 2;
-      const dx     = (e.clientX - cx) / (rect.width  / 2);
-      const dy     = (e.clientY - cy) / (rect.height / 2);
-      const rotX   = dy * -6;
-      const rotY   = dx *  6;
-
-      card.style.transform   = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px)`;
-      card.style.transition  = "transform 0.1s ease";
-
-      // Subtle inner shine
-      const shine = card.querySelector(".card-shine");
-      if (shine) {
-        shine.style.background = `radial-gradient(circle at ${((dx + 1) / 2) * 100}% ${((dy + 1) / 2) * 100}%, rgba(255,255,255,0.08) 0%, transparent 60%)`;
-      }
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform  = "";
-      card.style.transition = "transform 0.45s ease, border-color 0.25s ease";
-      const shine = card.querySelector(".card-shine");
-      if (shine) shine.style.background = "none";
-    });
-
-    // Add shine layer
-    const shine = document.createElement("div");
-    shine.className = "card-shine";
-    card.appendChild(shine);
-  });
-
-  // ─── COUNTER ANIMATION ───────────────────────────────────────────────────
-  function animateCounter(el) {
-    const target   = parseFloat(el.dataset.target);
-    const suffix   = el.dataset.suffix || "";
-    const duration = 1800;
-    const start    = performance.now();
-
-    function update(now) {
-      const elapsed  = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased    = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (progress < 1) requestAnimationFrame(update);
     }
-    requestAnimationFrame(update);
-  }
 
-  const counterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        counterObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.6 });
 
-  document.querySelectorAll("[data-target]").forEach(el => counterObserver.observe(el));
+    window.addEventListener(
+        "scroll",
+        updateNavigation
+    );
 
-  // ─── SMOOTH ANCHOR SCROLL ────────────────────────────────────────────────
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", e => {
-      const id  = anchor.getAttribute("href").slice(1);
-      const target = id ? document.getElementById(id) : null;
-      if (!target) return;
-      e.preventDefault();
-      const headerH = header ? header.offsetHeight : 88;
-      const top     = target.getBoundingClientRect().top + window.scrollY - headerH - 16;
-      window.scrollTo({ top, behavior: "smooth" });
-    });
-  });
 
-  // ─── FAB PULSE ON SCROLL ─────────────────────────────────────────────────
-  const fab = document.querySelector(".fab-whatsapp");
-  if (fab) {
-    let lastScrollY = window.scrollY;
+    /* Resposta imediata ao tocar (não espera o scroll confirmar) */
+
+    document
+        .querySelectorAll(".liquid-nav-item")
+        .forEach(item => {
+
+            item.addEventListener("click", () => {
+
+                document
+                    .querySelectorAll(".liquid-nav-item")
+                    .forEach(el =>
+                        el.classList.remove("active")
+                    );
+
+                item.classList.add("active");
+
+            });
+
+        });
+
+
+    /* ======================================
+       EFEITO PARALLAX NA LOGO DO HERO
+    ====================================== */
+
+    const backgroundLogo =
+        document.querySelector(
+            ".hero-logo-background"
+        );
+
+
     window.addEventListener("scroll", () => {
-      const currentY = window.scrollY;
-      if (currentY > lastScrollY + 50) {
-        fab.classList.add("fab-hidden");
-      } else if (currentY < lastScrollY - 10) {
-        fab.classList.remove("fab-hidden");
-      }
-      lastScrollY = currentY;
-    }, { passive: true });
-  }
 
-  // ─── PROGRESS BAR (LEITURA) ──────────────────────────────────────────────
-  const progressBar = document.createElement("div");
-  progressBar.className = "scroll-progress";
-  document.body.appendChild(progressBar);
+        if (!backgroundLogo) return;
 
-  window.addEventListener("scroll", () => {
-    const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled   = window.scrollY;
-    const pct        = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
-    progressBar.style.width = pct + "%";
-  }, { passive: true });
 
-  // ─── PLAN CARD HOVER GLOW ────────────────────────────────────────────────
-  document.querySelectorAll(".card.plan").forEach(plan => {
-    plan.addEventListener("mouseenter", () => {
-      plan.style.boxShadow = "0 24px 70px rgba(168,85,247,0.28), 0 0 0 1px rgba(168,85,247,0.3)";
+        const scroll =
+            window.scrollY;
+
+
+        if (scroll < 1000) {
+
+            backgroundLogo.style.transform =
+                `translateX(-25%)
+                 translateY(${scroll * 0.09}px)
+                 rotate(-5deg)`;
+
+        }
+
     });
-    plan.addEventListener("mouseleave", () => {
-      plan.style.boxShadow = "";
+
+
+    /* ======================================
+       MOVIMENTO SUAVE DO DASHBOARD
+    ====================================== */
+
+    const heroVisual =
+        document.querySelector(".hero-visual");
+
+
+    if (
+        heroVisual &&
+        window.matchMedia(
+            "(min-width: 1000px)"
+        ).matches
+    ) {
+
+        heroVisual.addEventListener(
+            "mousemove",
+            event => {
+
+                const rect =
+                    heroVisual
+                        .getBoundingClientRect();
+
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+
+                const centerX =
+                    rect.width / 2;
+
+
+                const centerY =
+                    rect.height / 2;
+
+
+                const rotateY =
+                    ((x - centerX) /
+                        centerX) * 2;
+
+
+                const rotateX =
+                    ((centerY - y) /
+                        centerY) * 2;
+
+
+                const dashboard =
+                    heroVisual.querySelector(
+                        ".dashboard"
+                    );
+
+
+                if (dashboard) {
+
+                    dashboard.style.transform =
+                        `
+                        perspective(1200px)
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY - 4}deg)
+                        `;
+
+                }
+
+            }
+        );
+
+
+        heroVisual.addEventListener(
+            "mouseleave",
+            () => {
+
+                const dashboard =
+                    heroVisual.querySelector(
+                        ".dashboard"
+                    );
+
+
+                if (dashboard) {
+
+                    dashboard.style.transform =
+                        `
+                        perspective(1200px)
+                        rotateY(-4deg)
+                        rotateX(1deg)
+                        `;
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ======================================
+       VIDEO MOTION
+    ====================================== */
+
+    const ominyVideo =
+        document.getElementById("ominyVideo");
+
+
+    if (ominyVideo) {
+
+        const videoObserver =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        /*
+                        Não iniciamos automaticamente
+                        com som para respeitar
+                        políticas dos navegadores.
+                        */
+
+                        if (!entry.isIntersecting) {
+
+                            ominyVideo.pause();
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    threshold: 0.25
+                }
+
+            );
+
+
+        videoObserver.observe(ominyVideo);
+
+    }
+
+
+    /* ======================================
+       SMOOTH SCROLL
+    ====================================== */
+
+    const internalLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    internalLinks.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                const targetID =
+                    link.getAttribute("href");
+
+
+                if (
+                    targetID === "#" ||
+                    !targetID
+                ) {
+                    return;
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetID
+                    );
+
+
+                if (!target) return;
+
+
+                event.preventDefault();
+
+
+                const headerHeight =
+                    header
+                        ? header.offsetHeight
+                        : 0;
+
+
+                const position =
+                    target.offsetTop -
+                    headerHeight;
+
+
+                window.scrollTo({
+
+                    top: position,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+        );
+
     });
-  });
 
-  // ─── SECTION ENTRANCE LINES ──────────────────────────────────────────────
-  // Animated decorative line that grows when section enters viewport
-  document.querySelectorAll(".section-head .eyebrow").forEach(eyebrow => {
-    eyebrow.classList.add("eyebrow-anim");
-  });
 
-  // ─── REINIT ICONS AFTER DYNAMIC CHANGES ─────────────────────────────────
-  setTimeout(() => {
-    if (window.lucide) window.lucide.createIcons();
-  }, 300);
+    /* ======================================
+       CARDS - EFEITO DE LUZ
+    ====================================== */
+
+    const cards =
+        document.querySelectorAll(
+            ".service-card, .project-card, .testimonial-card:not(.testimonial-rating)"
+        );
+
+
+    cards.forEach(card => {
+
+        card.addEventListener(
+            "mousemove",
+            event => {
+
+                const rect =
+                    card.getBoundingClientRect();
+
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+
+                card.style.background =
+                    `
+                    radial-gradient(
+                        circle at ${x}px ${y}px,
+                        rgba(121,61,255,.13),
+                        transparent 150px
+                    ),
+                    linear-gradient(
+                        145deg,
+                        #0e141d,
+                        #090e14
+                    )
+                    `;
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                card.style.background = "";
+
+            }
+        );
+
+    });
+
+
+    /* ======================================
+       CLIENTES EM DESTAQUE - TILT NA IMAGEM
+    ====================================== */
+
+    const clientMedias =
+        document.querySelectorAll(".client-feature-media");
+
+
+    clientMedias.forEach(media => {
+
+        media.addEventListener("mousemove", event => {
+
+            const rect = media.getBoundingClientRect();
+
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const rotateY =
+                ((x - rect.width / 2) / (rect.width / 2)) * 6;
+
+            const rotateX =
+                ((rect.height / 2 - y) / (rect.height / 2)) * 6;
+
+            media.style.transform =
+                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+
+        });
+
+
+        media.addEventListener("mouseleave", () => {
+
+            media.style.transform =
+                "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
+
+        });
+
+    });
+
+
+    /* ======================================
+       TECH: ANIMAÇÕES LIGADAS AO SCROLL
+    ====================================== */
+
+    const reduceMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    /* Direção de entrada dos blocos */
+
+    document
+        .querySelectorAll(
+            ".section-intro.reveal, .hero-content.reveal, .projects-header.reveal"
+        )
+        .forEach(el => el.classList.add("reveal-left"));
+
+    document
+        .querySelectorAll(".hero-visual.reveal")
+        .forEach(el => el.classList.add("reveal-right"));
+
+
+    /* Entrada escalonada dos cards */
+
+    document
+        .querySelectorAll(
+            ".services-grid, .steps, .projects-grid, .testimonial-cards"
+        )
+        .forEach(group => {
+
+            group.querySelectorAll(".reveal").forEach((el, i) => {
+
+                el.style.transitionDelay = `${(i % 4) * 110}ms`;
+
+                const clear = e => {
+
+                    if (
+                        e.target === el &&
+                        e.propertyName === "opacity"
+                    ) {
+
+                        el.style.transitionDelay = "";
+
+                        el.removeEventListener(
+                            "transitionend",
+                            clear
+                        );
+
+                    }
+
+                };
+
+                el.addEventListener("transitionend", clear);
+
+            });
+
+        });
+
+
+    const progressBar =
+        document.getElementById("scrollProgress");
+
+    const parallaxItems =
+        document.querySelectorAll("[data-parallax]");
+
+    const stepsBox =
+        document.querySelector(".steps");
+
+    const stepItems =
+        document.querySelectorAll(".step");
+
+    const phoneMockup =
+        document.getElementById("phoneMockup");
+
+    const cinematicImage =
+        document.getElementById("cinematicImage");
+
+
+    function scrollEffects() {
+
+        const vh = window.innerHeight;
+
+        const y = window.scrollY;
+
+        const max =
+            document.documentElement.scrollHeight - vh;
+
+
+        /* Barra de progresso da página */
+
+        if (progressBar) {
+
+            progressBar.style.setProperty(
+                "--scroll",
+                max > 0 ? y / max : 0
+            );
+
+        }
+
+        if (reduceMotion) return;
+
+
+        /* Parallax das imagens de fundo */
+
+        parallaxItems.forEach(el => {
+
+            const r =
+                el.parentElement.getBoundingClientRect();
+
+            if (r.bottom < 0 || r.top > vh) return;
+
+            const offset =
+                (r.top + r.height / 2 - vh / 2) *
+                -parseFloat(el.dataset.parallax);
+
+            el.style.transform =
+                `translate3d(0, ${offset}px, 0)`;
+
+        });
+
+
+        /* Linha do processo se desenhando */
+
+        if (stepsBox) {
+
+            const r =
+                stepsBox.getBoundingClientRect();
+
+            const p =
+                Math.min(
+                    1,
+                    Math.max(
+                        0,
+                        (vh * 0.85 - r.top) / (vh * 0.5)
+                    )
+                );
+
+            stepsBox.style.setProperty("--p", p);
+
+            stepItems.forEach((step, i) => {
+
+                step.classList.toggle(
+                    "done",
+                    p > 0.01 &&
+                    p >= i / (stepItems.length - 1) - 0.02
+                );
+
+            });
+
+        }
+
+
+        /* Celular girando suavemente ao passar pela tela */
+
+        if (phoneMockup) {
+
+            const r =
+                phoneMockup.getBoundingClientRect();
+
+            const t =
+                Math.max(
+                    -1,
+                    Math.min(
+                        1,
+                        (r.top + r.height / 2 - vh / 2) / vh
+                    )
+                );
+
+            phoneMockup.style
+                .setProperty("--ry", (-14 * t).toFixed(2));
+
+            phoneMockup.style
+                .setProperty("--rx", (8 * t).toFixed(2));
+
+        }
+
+
+
+        /* Cena final: zoom que se afasta até a imagem ficar inteira */
+
+        if (cinematicImage) {
+
+            const r =
+                cinematicImage.parentElement.getBoundingClientRect();
+
+            const p =
+                Math.min(
+                    1,
+                    Math.max(
+                        0,
+                        (vh - r.top) / (vh + r.height)
+                    )
+                );
+
+            const scale =
+                1.08 - 0.08 * Math.min(1, p * 2);
+
+            cinematicImage.style.transform =
+                `scale(${scale.toFixed(4)})`;
+
+        }
+
+    }
+
+
+    let scrollTicking = false;
+
+    function onScroll() {
+
+        if (scrollTicking) return;
+
+        scrollTicking = true;
+
+        requestAnimationFrame(() => {
+
+            scrollEffects();
+
+            scrollTicking = false;
+
+        });
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        onScroll,
+        { passive: true }
+    );
+
+    window.addEventListener("resize", onScroll);
+
+    scrollEffects();
+
+
 });
