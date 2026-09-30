@@ -118,6 +118,12 @@ p {
     object-fit: contain;
 }
 
+.header-logo-full {
+    height: 30px;
+    width: auto;
+    object-fit: contain;
+}
+
 .brand-name {
     font-family: "Space Grotesk", "Inter", sans-serif;
     font-weight: 700;
@@ -929,6 +935,13 @@ p {
         0 0 15px #7140ff;
 }
 
+.service-icon svg {
+    display: block;
+    flex-shrink: 0;
+
+    filter: drop-shadow(0 0 8px rgba(113,64,255,.5));
+}
+
 .service-card h3 {
     font-size: 14px;
 
@@ -939,15 +952,6 @@ p {
     font-size: 11px;
 
     line-height: 1.6;
-}
-
-.card-arrow {
-    position: absolute;
-
-    left: 25px;
-    bottom: 20px;
-
-    color: #8855ff;
 }
 
 
@@ -1807,6 +1811,12 @@ p {
     margin-bottom: 0;
 }
 
+.footer-logo-full {
+    height: 34px;
+    width: auto;
+    object-fit: contain;
+}
+
 .footer p,
 .footer a {
     color: #7f8997;
@@ -2231,6 +2241,10 @@ p {
     .header-logo {
         width: 30px;
         height: 30px;
+    }
+
+    .header-logo-full {
+        height: 24px;
     }
 
     .brand-name {
@@ -2747,6 +2761,11 @@ h1, h2, h3 {
         background .4s,
         color .4s,
         box-shadow .4s;
+}
+
+.liquid-nav-icon-circle svg {
+    display: block;
+    flex-shrink: 0;
 }
 
 .liquid-nav-label {
